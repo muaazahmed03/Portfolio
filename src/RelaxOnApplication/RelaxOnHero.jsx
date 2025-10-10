@@ -101,9 +101,9 @@ const RelaxOnHero = () => {
         <br />
         <div className="space-y-2 sm:space-y-3 text-sm sm:text-base md:text-lg lg:text-xl mt-2 sm:mt-4 w-full max-w-full">
           <p className="break-words">
-            Role → <strong>Order Foods With Multiple Restuarants</strong>
+            Role → <strong>Personal Massage Service Accross in London</strong>
           </p>
-          <p className="break-words">Developing Tool → React Native with React Native Paper</p>
+          <p className="break-words">Developing Tool → React Native with Complete Backend & Database with Stripe Integration</p>
         </div>
       </div>
 
