@@ -30,7 +30,7 @@ const AppDemo = () => {
   ]
 
   return (
-    <section className="min-h-screen bg-gradient-to-br from-zinc-900 via-zinc-700 to-gray-900 text-white py-16 px-4 sm:px-6 lg:px-8">
+    <section className="min-h-screen bg-gradient-to-br from-teal-950 via-zinc-700 to-teal-950 text-white py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16">

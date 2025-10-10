@@ -1,36 +1,64 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
-import AOS from "aos"
-import "aos/dist/aos.css"
+import { useRef, useState, Suspense } from "react"
+import { Canvas, useFrame } from "@react-three/fiber"
+import { Box, Sphere, MeshDistortMaterial } from "@react-three/drei"
 import { Code, Database, Smartphone, Globe, Award, Calendar, MapPin, Mail, Phone, User } from "lucide-react"
 
-const About = () => {
-  const [isVisible, setIsVisible] = useState(false)
-  const sectionRef = useRef(null)
+function FloatingCard({ position }) {
+  const meshRef = useRef()
+
+  useFrame((state) => {
+    const time = state.clock.getElapsedTime()
+    meshRef.current.position.y = position[1] + Math.sin(time + position[0]) * 0.3
+    meshRef.current.rotation.x = time * 0.2
+    meshRef.current.rotation.y = time * 0.3
+  })
+
+  return (
+    <Box ref={meshRef} position={position} args={[0.5, 0.5, 0.5]}>
+      <meshStandardMaterial color="#30b7ec" wireframe />
+    </Box>
+  )
+}
+
+function FloatingSphere({ position }) {
+  const meshRef = useRef()
+
+  useFrame((state) => {
+    const time = state.clock.getElapsedTime()
+    meshRef.current.position.y = position[1] + Math.cos(time + position[0]) * 0.2
+    meshRef.current.rotation.x = time * 0.15
+    meshRef.current.rotation.z = time * 0.15
+  })
+
+  return (
+    <Sphere ref={meshRef} position={position} args={[0.3, 32, 32]}>
+      <MeshDistortMaterial color="#0ea5e9" distort={0.3} speed={2} roughness={0.4} />
+    </Sphere>
+  )
+}
+
+function Scene() {
+  return (
+    <>
+      <ambientLight intensity={0.3} />
+      <pointLight position={[10, 10, 10]} intensity={0.5} color="#30b7ec" />
+      <pointLight position={[-10, -10, -10]} intensity={0.3} color="#0ea5e9" />
+
+      <FloatingCard position={[-3, 0, -2]} />
+      <FloatingCard position={[3, 1, -3]} />
+      <FloatingCard position={[-2, -1, -1]} />
+      <FloatingSphere position={[2, -1, -2]} />
+      <FloatingSphere position={[-3, 1, -3]} />
+      <FloatingSphere position={[3, 0, -1]} />
+    </>
+  )
+}
+
+export default function About() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
-
-  useEffect(() => {
-    AOS.init({
-      duration: 1200,
-      once: false,
-      offset: 100,
-      easing: "ease-in-out",
-    })
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting)
-      },
-      { threshold: 0.3 },
-    )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [])
+  const sectionRef = useRef(null)
 
   const handleMouseMove = (e) => {
     if (sectionRef.current) {
@@ -55,17 +83,27 @@ const About = () => {
       techs: ["Node.js", "Express.js", "MongoDB"],
       color: "from-green-500 to-emerald-500",
     },
-    { name: "Mobile Applications", icon: Smartphone, techs: ["React Native", "CLI"], color: "from-purple-500 to-pink-500" },
-    { name: "Other Languages", icon: Code, techs: ["JavaScript", "C++", "C#", "SQL"], color: "from-orange-500 to-red-500" },
+    {
+      name: "Mobile Applications",
+      icon: Smartphone,
+      techs: ["React Native", "CLI", "Expo"],
+      color: "from-purple-500 to-pink-500",
+    },
+    {
+      name: "Other Languages",
+      icon: Code,
+      techs: ["TypeScript", "C++", "C#", "SQL"],
+      color: "from-orange-500 to-red-500",
+    },
   ]
 
   const personalInfo = [
-    { icon: User, label: "Degree", value: "Bachelors in Computer Science", delay: "100" },
-    { icon: MapPin, label: "Location", value: "Karachi, Pakistan", delay: "100" },
-    { icon: Phone, label: "Phone", value: "+92 313 233 2015", delay: "100" },
-    { icon: Calendar, label: "Date Of Birth", value: "03-May-2002", delay: "100" },
-    { icon: Mail, label: "Email", value: "muaazahmed0111@gmail.com", delay: "100" },
-    { icon: Award, label: "Experience", value: "6+ Months", delay: "100" },
+    { icon: User, label: "Degree", value: "Bachelors in Computer Science" },
+    { icon: MapPin, label: "Location", value: "Karachi, Pakistan" },
+    { icon: Phone, label: "Phone", value: "+92 313 233 2015" },
+    { icon: Calendar, label: "Date Of Birth", value: "03-May-2002" },
+    { icon: Mail, label: "Email", value: "muaaz.webdev@gmail.com" },
+    { icon: Award, label: "Experience", value: "8+ Months" },
   ]
 
   return (
@@ -73,42 +111,28 @@ const About = () => {
       ref={sectionRef}
       id="about"
       className="min-h-screen py-16 sm:py-20 px-4 sm:px-6 lg:px-16 overflow-x-hidden relative"
-      style={{
-        background: "linear-gradient(135deg, #04030c 0%, #0a0a0f 50%, #04030c 100%)",
-        color: "white",
-      }}
       onMouseMove={handleMouseMove}
     >
-      {/* Animated Background */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-10"
-          style={{
-            background: `radial-gradient(circle at ${mousePos.x}% ${mousePos.y}%, rgba(48, 183, 236, 0.3) 0%, transparent 50%)`,
-            transition: "background 0.3s ease",
-          }}
-        />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(48,183,236,0.1),transparent_50%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(14,165,233,0.1),transparent_50%)]" />
-
-        {/* Floating Particles */}
-        {[...Array(6)].map((_, i) => (
-          <div
-            key={i}
-            className={`absolute w-1 h-1 bg-teal-400 rounded-full animate-pulse opacity-60`}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${i * 0.5}s`,
-              animationDuration: `${2 + Math.random() * 2}s`,
-            }}
-          />
-        ))}
+      {/* 3D Background */}
+      <div className="absolute inset-0 z-0">
+        <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
+          <Suspense fallback={null}>
+            <Scene />
+          </Suspense>
+        </Canvas>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto">
-        {/* Header Section */}
-        <div className="text-center mb-16" data-aos="fade-down">
+      {/* Gradient Overlay */}
+      <div
+        className="absolute inset-0 z-10 opacity-20"
+        style={{
+          background: `radial-gradient(circle at ${mousePos.x}% ${mousePos.y}%, rgba(48, 183, 236, 0.3) 0%, transparent 50%)`,
+          transition: "background 0.3s ease",
+        }}
+      />
+
+      <div className="relative z-20 max-w-7xl mx-auto">
+        <div className="text-center mb-16">
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 bg-gradient-to-r from-teal-300 via-cyan-400 to-blue-400 bg-clip-text text-transparent">
             About Me
           </h2>
@@ -118,16 +142,17 @@ const About = () => {
           </p>
         </div>
 
-        {/* Main Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-16">
-          {/* Story Section */}
-          <div className="space-y-6" data-aos="fade-right" data-aos-delay="100">
-            <div className="bg-gradient-to-br from-zinc-900/50 to-zinc-800/30 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-zinc-700/50 hover:border-teal-500/30 transition-all duration-500">
+          <div className="space-y-6">
+            <div
+              className="bg-gradient-to-br from-zinc-900/80 to-zinc-800/60 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-zinc-700/50 hover:border-teal-500/30 transition-all duration-500 transform hover:scale-105 hover:rotate-1 hover:shadow-2xl hover:shadow-teal-500/20"
+              style={{ transformStyle: "preserve-3d" }}
+            >
               <h3 className="text-2xl sm:text-3xl font-bold mb-6 text-teal-300">My Journey</h3>
               <div className="space-y-4 text-zinc-300 leading-relaxed">
                 <p className="text-base sm:text-lg">
                   Greetings! I am <span className="text-teal-300 font-semibold">Muaaz Ahmed Baig</span>, a passionate
-                  <span className="text-teal-300 font-semibold"> MERN Stack Developer</span> based in Karachi, Pakistan.
+                  <span className="text-teal-300 font-semibold"> Full Stack Web & App Developer</span> based in Karachi, Pakistan.
                 </p>
                 <p className="text-base sm:text-lg">
                   I specialize in building modern web and mobile applications using
@@ -144,19 +169,26 @@ const About = () => {
             </div>
           </div>
 
-          {/* Personal Info Section */}
-          <div className="space-y-4" data-aos="fade-left" data-aos-delay="100">
+          <div className="space-y-4">
             <h3 className="text-2xl sm:text-3xl font-bold mb-6 text-teal-300">Personal Details</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {personalInfo.map((info, index) => (
                 <div
                   key={index}
-                  className="bg-gradient-to-br from-zinc-900/50 to-zinc-800/30 backdrop-blur-sm rounded-xl p-4 border border-zinc-700/50 hover:border-teal-500/30 transition-all duration-500 hover:scale-105 group"
-                  data-aos="zoom-in"
-                  data-aos-delay={info.delay}
+                  className="bg-gradient-to-br from-zinc-900/80 to-zinc-800/60 backdrop-blur-sm rounded-xl p-4 border border-zinc-700/50 hover:border-teal-500/30 transition-all duration-500 group cursor-pointer"
+                  style={{
+                    transformStyle: "preserve-3d",
+                    transform: "perspective(1000px)",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = "perspective(1000px) rotateX(5deg) rotateY(5deg) translateZ(20px)"
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)"
+                  }}
                 >
                   <div className="flex items-center space-x-3">
-                    <div className="p-2 bg-gradient-to-br from-teal-500 to-cyan-500 rounded-lg group-hover:scale-110 transition-transform duration-300">
+                    <div className="p-2 bg-gradient-to-br from-teal-500 to-cyan-500 rounded-lg group-hover:scale-110 transition-transform duration-300 shadow-lg group-hover:shadow-teal-500/50">
                       <info.icon size={16} className="text-white" />
                     </div>
                     <div className="min-w-0 flex-1">
@@ -170,19 +202,26 @@ const About = () => {
           </div>
         </div>
 
-        {/* Skills Section */}
-        <div className="mb-16" data-aos="fade-up" data-aos-delay="100">
+        <div className="mb-16">
           <h3 className="text-2xl sm:text-3xl font-bold text-center mb-8 text-teal-300">Technical Expertise</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {skills.map((skill, index) => (
               <div
                 key={index}
-                className="bg-gradient-to-br from-zinc-900/50 to-zinc-800/30 backdrop-blur-sm rounded-2xl p-6 border border-zinc-700/50 hover:border-teal-500/30 transition-all duration-500 hover:scale-105 group"
-                data-aos="flip-left"
-                data-aos-delay={`${700 + index * 100}`}
+                className="bg-gradient-to-br from-zinc-900/80 to-zinc-800/60 backdrop-blur-sm rounded-2xl p-6 border border-zinc-700/50 hover:border-teal-500/30 transition-all duration-500 group cursor-pointer"
+                style={{
+                  transformStyle: "preserve-3d",
+                  transform: "perspective(1000px)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "perspective(1000px) rotateY(10deg) translateZ(30px)"
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "perspective(1000px) rotateY(0deg) translateZ(0px)"
+                }}
               >
                 <div
-                  className={`w-12 h-12 bg-gradient-to-br ${skill.color} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}
+                  className={`w-12 h-12 bg-gradient-to-br ${skill.color} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 shadow-lg`}
                 >
                   <skill.icon size={24} className="text-white" />
                 </div>
@@ -191,7 +230,7 @@ const About = () => {
                   {skill.techs.map((tech, techIndex) => (
                     <span
                       key={techIndex}
-                      className="inline-block bg-zinc-800/50 text-zinc-300 px-3 py-1 rounded-full text-sm mr-2 mb-2 hover:bg-teal-600/20 hover:text-teal-300 transition-colors duration-300"
+                      className="inline-block bg-zinc-800/50 text-zinc-300 px-3 py-1 rounded-full text-sm mr-2 mb-2 hover:bg-teal-600/20 hover:text-teal-300 transition-all duration-300 hover:scale-110"
                     >
                       {tech}
                     </span>
@@ -202,9 +241,19 @@ const About = () => {
           </div>
         </div>
 
-        {/* Call to Action */}
-        <div className="text-center" data-aos="zoom-in" data-aos-delay="100">
-          <div className="bg-gradient-to-br from-zinc-900/50 to-zinc-800/30 backdrop-blur-sm rounded-2xl p-8 border border-zinc-700/50 hover:border-teal-500/30 transition-all duration-500 max-w-2xl mx-auto">
+        <div className="text-center">
+          <div
+            className="bg-gradient-to-br from-zinc-900/80 to-zinc-800/60 backdrop-blur-sm rounded-2xl p-8 border border-zinc-700/50 hover:border-teal-500/30 transition-all duration-500 max-w-2xl mx-auto transform hover:scale-105 hover:shadow-2xl hover:shadow-teal-500/20"
+            style={{
+              transformStyle: "preserve-3d",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "perspective(1000px) translateZ(20px) scale(1.05)"
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "perspective(1000px) translateZ(0px) scale(1)"
+            }}
+          >
             <h3 className="text-2xl font-bold text-teal-300 mb-4">Let's Build Something Amazing</h3>
             <p className="text-zinc-300 mb-6 leading-relaxed">
               I'm constantly evolving with new technologies, aiming to create impactful and innovative solutions. Ready
@@ -213,13 +262,13 @@ const About = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="#projects"
-                className="bg-gradient-to-r from-teal-600 to-cyan-600 hover:from-teal-500 hover:to-cyan-500 text-white px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105 font-semibold"
+                className="bg-gradient-to-r from-teal-600 to-teal-800 hover:from-teal-500 hover:to-teal-600 text-white px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-teal-500/50 font-semibold"
               >
                 View My Work
               </a>
               <a
                 href="#footer"
-                className="border border-teal-500 text-teal-300 hover:bg-teal-500 hover:text-white px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105 font-semibold"
+                className="border border-zinc-50 text-zinc-50 hover:bg-zinc-50 hover:text-zinc-950 px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-zinc-500/50 font-semibold"
               >
                 Get In Touch
               </a>
@@ -230,5 +279,3 @@ const About = () => {
     </section>
   )
 }
-
-export default About

@@ -1,7 +1,7 @@
 "use client"
 
 import { useRef, useEffect, useState } from "react"
-import { Github, Instagram, Facebook, FileText, Mail, MapPin, Phone } from "lucide-react"
+import { Github, Instagram, Facebook, Linkedin, FileText, Mail, MapPin, Phone } from "lucide-react"
 
 const Footer = () => {
   const footerRef = useRef(null)
@@ -53,16 +53,22 @@ const Footer = () => {
 
   const socialLinks = [
     {
-      name: "Instagram",
-      url: "https://www.instagram.com/muaaz_ahmed_03/",
-      icon: Instagram,
-      color: "hover:text-pink-400",
+      name: "LinkedIn",
+      url: "https://www.linkedin.com/in/muaaz-ahmed-301941379/",
+      icon: Linkedin,
+      color: "hover:text-blue-700",
     },
     {
       name: "GitHub",
       url: "https://github.com/muaazahmed03",
       icon: Github,
-      color: "hover:text-gray-300",
+      color: "hover:text-teal-200",
+    },
+    {
+      name: "Instagram",
+      url: "https://www.instagram.com/cali_maaz/",
+      icon: Instagram,
+      color: "hover:text-pink-400",
     },
     {
       name: "Facebook",
@@ -75,13 +81,13 @@ const Footer = () => {
   const contactInfo = [
     {
       icon: Mail,
-      text: "muaazahmed0111@gmail.com",
+      text: "muaaz.webdev@gmail.com",
       href: "mailto:muaazahmed0111@gmail.com",
     },
     {
       icon: Phone,
       text: "+92 313 233 2015",
-      href: "tel:+923132332015",
+      href: "#",
     },
     {
       icon: MapPin,
@@ -118,13 +124,13 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="text-center md:text-left space-y-4">
             <h3 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-teal-300 to-cyan-400 bg-clip-text text-transparent">
-              Muaaz Ahmed
+              Muaaz Ahmed 
             </h3>
             <p className="text-zinc-400 text-sm sm:text-base leading-relaxed">
-              MERN Stack Developer crafting modern web & mobile solutions with passion and precision.
+              Full Stack Developer crafting modern web & mobile solutions with passion and precision.
             </p>
             <a
-              href="/muaaz-ahmed-baig-cv.pdf"
+              href="/muaaz-ahmed-resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-2 bg-gradient-to-r from-teal-600 to-cyan-600 hover:from-teal-500 hover:to-cyan-500 text-white px-4 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 text-sm sm:text-base"

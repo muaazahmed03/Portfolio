@@ -7,6 +7,7 @@ import Skills from "./components/Skills"
 import Projects from "./components/Projects"
 import FastFood from "./components/FastFood"
 import Footer from "./components/Footer"
+import RelaxOn from "./components/RelaxOn"
 
 function App() {
   const location = useLocation()
@@ -43,6 +44,7 @@ function App() {
           }
         />
         <Route path="/fastfood" element={<FastFood />} />
+        <Route path="/relaxon" element={<RelaxOn />} />
       </Routes>
     </div>
   )

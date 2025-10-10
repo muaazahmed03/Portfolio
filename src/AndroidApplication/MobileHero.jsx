@@ -1,7 +1,21 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
-import "../index.css"
+import { useEffect, useRef, useState, Suspense } from "react"
+import { Canvas, useFrame } from "@react-three/fiber"
+import { Stars } from "@react-three/drei"
+
+function AnimatedStars() {
+  const starsRef = useRef()
+
+  useFrame((state) => {
+    if (starsRef.current) {
+      starsRef.current.rotation.x = state.clock.getElapsedTime() * 0.05
+      starsRef.current.rotation.y = state.clock.getElapsedTime() * 0.03
+    }
+  })
+
+  return <Stars ref={starsRef} radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
+}
 
 const MobileHero = () => {
   const [time, setTime] = useState(new Date().toLocaleTimeString())
@@ -30,7 +44,7 @@ const MobileHero = () => {
 
     const animate = () => {
       setCurrentPos((prev) => ({
-        x: prev.x + (mousePos.x - prev.x) * 0.08, // Slow smooth movement
+        x: prev.x + (mousePos.x - prev.x) * 0.08,
         y: prev.y + (mousePos.y - prev.y) * 0.08,
       }))
       animationFrameId = requestAnimationFrame(animate)
@@ -61,15 +75,26 @@ const MobileHero = () => {
 
   return (
     <section className="h-screen w-full relative overflow-hidden text-zinc-200 font-sans" onMouseMove={handleMouseMove}>
+      {/* 3D Stars Background */}
+      <div className="absolute inset-0 z-0">
+        <Canvas camera={{ position: [0, 0, 1] }}>
+          <Suspense fallback={null}>
+            <AnimatedStars />
+          </Suspense>
+        </Canvas>
+      </div>
+
+      {/* Spotlight Effect */}
       <div
         ref={spotlightRef}
-        className="absolute inset-0 z-0 transition-all duration-500 ease-out pointer-events-none"
+        className="absolute inset-0 z-10 transition-all duration-500 ease-out pointer-events-none"
         style={{
           background: `radial-gradient(circle at ${currentPos.x}px ${currentPos.y}px, rgba(29, 179, 41, 0.63), transparent 40%)`,
         }}
-      ></div>
+      />
 
-      <div className="relative z-10 flex flex-col items-start justify-center h-full px-4 sm:px-6 md:px-16 space-y-4 sm:space-y-6 w-full max-w-full overflow-x-hidden">
+      {/* Content */}
+      <div className="relative z-20 flex flex-col items-start justify-center h-full px-4 sm:px-6 md:px-16 space-y-4 sm:space-y-6 w-full max-w-full overflow-x-hidden">
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold break-words leading-tight">
           Food Fusion - Android Application
         </h1>
@@ -83,7 +108,7 @@ const MobileHero = () => {
       </div>
 
       {/* Mobile ke liye subtle hint */}
-      <div className="absolute bottom-8 right-8 text-zinc-500 text-xs hidden sm:block">
+      <div className="absolute bottom-8 right-8 text-zinc-300 text-xs hidden sm:block">
         Move cursor for spotlight effect
       </div>
     </section>

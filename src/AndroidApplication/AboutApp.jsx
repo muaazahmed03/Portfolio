@@ -152,7 +152,7 @@ const AboutApp = () => {
       {/* About Section */}
       <motion.section
         ref={ref}
-        className="py-16 bg-zinc-800"
+        className="py-16 bg-gray-900"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"

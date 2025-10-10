@@ -2,7 +2,7 @@
 
 import "../index.css"
 import { useState } from "react"
-import { FileText, Github, Instagram, Menu, X } from "lucide-react"
+import { FileText, Github, Instagram, Linkedin, Menu, X } from "lucide-react"
 
 const MobNavbar = ({ scrollToAbout, scrollToDemo }) => {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -46,20 +46,21 @@ const MobNavbar = ({ scrollToAbout, scrollToDemo }) => {
             <FileText size={20} />
           </a>
           <a
+            href="https://www.linkedin.com/in/muaaz-ahmed-301941379/"
+            target="_blank"
+            className="hover:text-lime-300"
+            title="Linkedin"
+            rel="noreferrer"
+          >
+            <Linkedin size={20} />
+          </a>
+          <a
             href="https://github.com/muaazahmed03"
             target="_blank"
             className="hover:text-lime-300"
             rel="noreferrer"
           >
             <Github size={20} />
-          </a>
-          <a
-            href="https://www.instagram.com/muaaz_ahmed_03/"
-            target="_blank"
-            className="hover:text-lime-300"
-            rel="noreferrer"
-          >
-            <Instagram size={20} />
           </a>
         </div>
 
@@ -122,20 +123,20 @@ const MobNavbar = ({ scrollToAbout, scrollToDemo }) => {
             Resume
           </a>
           <a
+            href="https://www.linkedin.com/in/muaaz-ahmed-301941379/"
+            target="_blank"
+            className="hover:text-lime-300 w-full"
+            rel="noreferrer"
+          >
+            LinkedIn
+          </a>
+          <a
             href="https://github.com/muaazahmed03"
             target="_blank"
             className="hover:text-lime-300 w-full"
             rel="noreferrer"
           >
             GitHub
-          </a>
-          <a
-            href="https://www.instagram.com/muaaz_ahmed_03/"
-            target="_blank"
-            className="hover:text-lime-300 w-full"
-            rel="noreferrer"
-          >
-            Instagram
           </a>
         </div>
       </div>

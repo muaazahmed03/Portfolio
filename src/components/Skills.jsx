@@ -54,7 +54,7 @@ const skillsData = [
   {
     name: "Node JS",
     desc: "Server-side JavaScript runtime",
-    img: "https://img.icons8.com/color/96/nodejs.png",
+    img: "https://i.pinimg.com/736x/4d/fc/38/4dfc38802784bcf687f616e7e5a4370c.jpg",
     category: "backend",
     proficiency: 85,
     featured: true,
@@ -62,7 +62,7 @@ const skillsData = [
   {
     name: "Express JS",
     desc: "Fast backend framework for Node",
-    img: "https://img.icons8.com/color/512/express-js.png",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7S33Oq2FeRbyBBA6l1q8PwLVa3SzaONO-9Q&s",
     category: "backend",
     proficiency: 82,
     featured: true,
@@ -118,6 +118,22 @@ const skillsData = [
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjFNml5PoLN3JVTKF0rfMyeHXzuj0R0aMPfg&s",
     category: "mobile",
     proficiency: 84,
+  },
+  {
+    name: "Next JS",
+    desc: "Building user interfaces with advanced feature",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSV9uzErWz9EXqZDxZ5lP9aYpMz8eK6rr5X3w&s",
+    category: "frontend",
+    proficiency: 85,
+    featured: true,
+  },
+  {
+    name: "Stripe",
+    desc: "For use different payment methods",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQGluJhW7I1NYU7jF77E-9K9I46_ib_DUNHw&s",
+    category: "backend",
+    proficiency: 95,
+    featured: true,
   },
 ]
 

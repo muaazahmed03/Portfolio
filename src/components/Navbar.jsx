@@ -2,7 +2,7 @@
 
 import "../index.css"
 import { useState } from "react"
-import { FileText, Github, Instagram, Menu, X } from "lucide-react"
+import { FileText, Github, Instagram, Linkedin, Menu, X } from "lucide-react"
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -35,13 +35,22 @@ const Navbar = () => {
         {/* Right: Icons */}
         <div className="hidden md:flex items-center space-x-4 text-white flex-shrink-0">
           <a
-            href="/muaaz-ahmed-baig-cv.pdf"
+            href="/muaaz-ahmed-resume.pdf"
             target="_blank"
             className="hover:text-teal-200"
             title="Resume"
             rel="noreferrer"
           >
             <FileText size={20} />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/muaaz-ahmed-301941379/"
+            target="_blank"
+            className="hover:text-teal-200"
+            title="Linkedin"
+            rel="noreferrer"
+          >
+            <Linkedin size={20} />
           </a>
           <a
             href="https://github.com/muaazahmed03"
@@ -51,15 +60,6 @@ const Navbar = () => {
             rel="noreferrer"
           >
             <Github size={20} />
-          </a>
-          <a
-            href="https://www.instagram.com/muaaz_ahmed_03/"
-            target="_blank"
-            className="hover:text-teal-200"
-            title="Instagram"
-            rel="noreferrer"
-          >
-            <Instagram size={20} />
           </a>
         </div>
 
@@ -93,8 +93,16 @@ const Navbar = () => {
             Projects
           </a>
           <hr className="w-full border-gray-500" />
-          <a href="/muaaz-ahmed-baig-cv.pdf" target="_blank" className="hover:text-teal-200 w-full" rel="noreferrer">
+          <a href="/muaaz-ahmed-resume.pdf" target="_blank" className="hover:text-teal-200 w-full" rel="noreferrer">
             Resume
+          </a>
+          <a
+            href="https://www.linkedin.com/in/muaaz-ahmed-301941379/"
+            target="_blank"
+            className="hover:text-teal-200 w-full"
+            rel="noreferrer"
+          >
+            LinkedIn
           </a>
           <a
             href="https://github.com/muaazahmed03"
@@ -103,14 +111,6 @@ const Navbar = () => {
             rel="noreferrer"
           >
             GitHub
-          </a>
-          <a
-            href="https://www.instagram.com/muaaz_ahmed_03/"
-            target="_blank"
-            className="hover:text-teal-200 w-full"
-            rel="noreferrer"
-          >
-            Instagram
           </a>
         </div>
       </div>
