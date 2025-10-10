@@ -206,7 +206,7 @@ export default function Projects() {
         >
           <div
             className="flex items-center space-x-4 sm:space-x-6 flex-1 min-w-0"
-            onClick={() => openInNewTab("/relaxon")}
+            onClick={() => window.open("/relaxon", "_blank")}
           >
             {/* Phone-like video preview */}
             <div className="w-16 h-28 sm:w-18 sm:h-32 lg:w-20 lg:h-36 bg-white border-2 rounded-2xl overflow-hidden flex items-center justify-center flex-shrink-0 shadow-lg">
@@ -273,7 +273,7 @@ export default function Projects() {
         >
           <div
             className="flex items-center space-x-4 sm:space-x-6 flex-1 min-w-0"
-            onClick={() => openInNewTab("/fastfood")}
+            onClick={() => window.open("/fastfood", "_blank")}
           >
             <div className="w-16 h-28 sm:w-18 sm:h-32 lg:w-20 lg:h-36 bg-white border-2 rounded-2xl overflow-hidden flex items-center justify-center flex-shrink-0 shadow-lg">
               <video
