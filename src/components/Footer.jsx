@@ -54,7 +54,7 @@ const Footer = () => {
   const socialLinks = [
     {
       name: "LinkedIn",
-      url: "https://www.linkedin.com/in/muaaz-ahmed-301941379/",
+      url: "https://www.linkedin.com/in/muaaz-ahmed-baig/",
       icon: Linkedin,
       color: "hover:text-blue-700",
     },

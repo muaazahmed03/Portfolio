@@ -44,7 +44,7 @@ const Navbar = () => {
             <FileText size={20} />
           </a>
           <a
-            href="https://www.linkedin.com/in/muaaz-ahmed-301941379/"
+            href="https://www.linkedin.com/in/muaaz-ahmed-baig/"
             target="_blank"
             className="hover:text-teal-200"
             title="Linkedin"
@@ -97,7 +97,7 @@ const Navbar = () => {
             Resume
           </a>
           <a
-            href="https://www.linkedin.com/in/muaaz-ahmed-301941379/"
+            href="https://www.linkedin.com/in/muaaz-ahmed-baig/"
             target="_blank"
             className="hover:text-teal-200 w-full"
             rel="noreferrer"

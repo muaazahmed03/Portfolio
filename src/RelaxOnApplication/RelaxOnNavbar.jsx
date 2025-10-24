@@ -46,7 +46,7 @@ const RelaxOnNavbar = ({ scrollToAbout, scrollToDemo }) => {
             <FileText size={20} />
           </a>
           <a
-            href="https://www.linkedin.com/in/muaaz-ahmed-301941379/"
+            href="https://www.linkedin.com/in/muaaz-ahmed-baig/"
             target="_blank"
             className="hover:text-cyan-500"
             title="Linkedin"
@@ -123,7 +123,7 @@ const RelaxOnNavbar = ({ scrollToAbout, scrollToDemo }) => {
             Resume
           </a>
           <a
-            href="https://www.linkedin.com/in/muaaz-ahmed-301941379/"
+            href="https://www.linkedin.com/in/muaaz-ahmed-baig/"
             target="_blank"
             className="hover:text-cyan-500 w-full"
             rel="noreferrer"

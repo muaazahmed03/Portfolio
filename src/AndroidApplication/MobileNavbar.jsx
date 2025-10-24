@@ -46,7 +46,7 @@ const MobNavbar = ({ scrollToAbout, scrollToDemo }) => {
             <FileText size={20} />
           </a>
           <a
-            href="https://www.linkedin.com/in/muaaz-ahmed-301941379/"
+            href="https://www.linkedin.com/in/muaaz-ahmed-baig/"
             target="_blank"
             className="hover:text-lime-300"
             title="Linkedin"
@@ -123,7 +123,7 @@ const MobNavbar = ({ scrollToAbout, scrollToDemo }) => {
             Resume
           </a>
           <a
-            href="https://www.linkedin.com/in/muaaz-ahmed-301941379/"
+            href="https://www.linkedin.com/in/muaaz-ahmed-baig/"
             target="_blank"
             className="hover:text-lime-300 w-full"
             rel="noreferrer"

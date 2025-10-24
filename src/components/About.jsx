@@ -100,10 +100,10 @@ export default function About() {
   const personalInfo = [
     { icon: User, label: "Degree", value: "Bachelors in Computer Science" },
     { icon: MapPin, label: "Location", value: "Karachi, Pakistan" },
-    { icon: Phone, label: "Phone", value: "+92 313 233 2015" },
+    { icon: Phone, label: "Phone", value: "+92-3132332015" },
     { icon: Calendar, label: "Date Of Birth", value: "03-May-2002" },
     { icon: Mail, label: "Email", value: "muaaz.webdev@gmail.com" },
-    { icon: Award, label: "Experience", value: "8+ Months" },
+    { icon: Award, label: "Experience", value: "2 Years" },
   ]
 
   return (
